@@ -16,7 +16,7 @@ int main() {
         perror("Failed to redirect stdout");
         return 1;
     }
-    if (freopen("data/babylm-10M.csv", "r", stdin) == NULL) {
+    if (freopen("data/lengths.csv", "r", stdin) == NULL) {
         perror("Failed to redirect stdin");
         return 1;
     }

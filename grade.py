@@ -1,10 +1,11 @@
 seqlen = 4096
-theoretical_minimum_batches = 14065472 / seqlen
 
-with open("data/babylm-10M.csv", "r") as f:
+with open("data/lengths.csv", "r") as f:
     lines = f.readlines()
     N = len(lines) - 1
     lengths = [int(s.split(", ")[1]) for s in lines[1:]]
+
+theoretical_minimum_batches = sum(lengths) / seqlen
 
 packed = set()
 with open("output.txt", "r") as f:
