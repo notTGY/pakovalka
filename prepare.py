@@ -14,13 +14,25 @@ ds = load_dataset("HuggingFaceFW/fineweb-edu", "sample-10BT", data_files={"train
 
 print(f"loaded {len(ds)} samples")
 
+
+def tokenize(batch):
+    return {
+        "length": [
+            len(enc.encode(text, disallowed_special=())) + 1  # +1 for EOS separator
+            for text in batch["text"]
+        ]
+    }
+
+
+ds = ds.map(tokenize, batched=True, num_proc=1, remove_columns=ds.column_names)
+
 os.makedirs("data", exist_ok=True)
 
 with open("data/lengths.csv", "w") as f:
     f.write("Length\n")
     total = 0
     for item in ds:
-        length = len(enc.encode(item["text"], disallowed_special=())) + 1  # +1 for EOS separator
+        length = item["length"]
         if length > seqlen:
             continue
         f.write(str(length) + "\n")
