@@ -4,6 +4,8 @@ import time
 import tiktoken
 from datasets import load_dataset
 
+seqlen = 4096
+
 start = time.perf_counter_ns()
 
 enc = tiktoken.encoding_for_model("gpt-4o")
@@ -19,6 +21,8 @@ with open("data/lengths.csv", "w") as f:
     total = 0
     for index, item in enumerate(ds):
         length = len(enc.encode(item["text"])) + 1  # +1 for EOS separator
+        if length > seqlen:
+            continue
         f.write(str(index) + ", " + str(length) + "\n")
         total += length
     print(f"Total {total} tokens")
