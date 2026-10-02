@@ -1,6 +1,5 @@
 you are only allowed to edit pakovalka.c
-then compile it with gcc and run a.out for maximum 5 minutes
-then run python3 grade.py
+then run `make` to get score
 repeat until you run out of ideas or achieve theoretical max
 
 
