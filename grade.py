@@ -3,7 +3,7 @@ seqlen = 4096
 with open("data/lengths.csv", "r") as f:
     lines = f.readlines()
     N = len(lines) - 1
-    lengths = [int(s.split(", ")[1]) for s in lines[1:]]
+    lengths = [int(s) for s in lines[1:]]
 
 theoretical_minimum_batches = sum(lengths) / seqlen
 

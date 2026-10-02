@@ -10,20 +10,20 @@ start = time.perf_counter_ns()
 
 enc = tiktoken.encoding_for_model("gpt-4o")
 
-ds = load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1", split="train")
+ds = load_dataset("HuggingFaceFW/fineweb-edu", "sample-10BT", data_files={"train": [f"sample/10BT/{i:03d}_00000.parquet" for i in range(3)]}, split="train")
 
 print(f"loaded {len(ds)} samples")
 
 os.makedirs("data", exist_ok=True)
 
 with open("data/lengths.csv", "w") as f:
-    f.write("Id, Length\n")
+    f.write("Length\n")
     total = 0
-    for index, item in enumerate(ds):
-        length = len(enc.encode(item["text"])) + 1  # +1 for EOS separator
+    for item in ds:
+        length = len(enc.encode(item["text"], disallowed_special=())) + 1  # +1 for EOS separator
         if length > seqlen:
             continue
-        f.write(str(index) + ", " + str(length) + "\n")
+        f.write(str(length) + "\n")
         total += length
     print(f"Total {total} tokens")
 

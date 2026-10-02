@@ -20,8 +20,9 @@ int main() {
         perror("Failed to redirect stdin");
         return 1;
     }
-    scanf("Id, Length\n");
-    while (scanf("%d, %d", &idx, &num) == 2) {
+    scanf("Length\n");
+    idx = 0;
+    while (scanf("%d", &num) == 1) {
         if (idx < 0 || num < 0 || num > SEQLEN) return 1;
         if ((size_t)idx >= capacity) {
             while ((size_t)idx >= capacity) capacity *= 2;
@@ -31,6 +32,7 @@ int main() {
         }
         next[idx] = heads[num];
         heads[num] = idx;
+        idx++;
     }
 
     /* Fill each batch with the largest remaining sequence that fits.

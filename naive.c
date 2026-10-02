@@ -13,9 +13,10 @@ int main() {
         perror("Failed to redirect stdin");
         return 1;
     }
-    scanf("Id, Length\n");
-    while (scanf("%d, %d", &idx, &num) == 2) {
-        printf("%d\n", idx);
+    scanf("Length\n");
+    idx = 0;
+    while (scanf("%d", &num) == 1) {
+        printf("%d\n", idx++);
     }
 
     fclose(fp);
