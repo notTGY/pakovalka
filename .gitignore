@@ -1,0 +1,7 @@
+*.pyc
+pycache
+dist
+uv.lock
+data
+a.out
+output.txt

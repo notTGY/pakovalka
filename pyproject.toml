@@ -1,0 +1,10 @@
+[project]
+name = "pakovalka"
+version = "0.1.0"
+description = "How to efficiently pack tokens into batches of seqlen for llm pre training?"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "datasets>=5.0.1",
+    "tiktoken>=0.14.0",
+]
